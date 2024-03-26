@@ -35,6 +35,9 @@ dependencies:
   class-validator:
     specifier: ^0.14.1
     version: 0.14.1
+  ms:
+    specifier: ^2.1.3
+    version: 2.1.3
   nestjs-pino:
     specifier: ^4.0.0
     version: 4.0.0(@nestjs/common@10.3.3)(pino-http@9.0.0)
@@ -76,6 +79,9 @@ devDependencies:
   '@types/jest':
     specifier: ^29.5.2
     version: 29.5.12
+  '@types/ms':
+    specifier: ^0.7.34
+    version: 0.7.34
   '@types/node':
     specifier: ^20.3.1
     version: 20.11.22
@@ -1346,6 +1352,10 @@ packages:
 
   /@types/mime@3.0.4:
     resolution: {integrity: sha512-iJt33IQnVRkqeqC7PzBHPTC6fDlRNRW8vjrgqtScAhrmMwe8c4Eo7+fUGTa+XdWrpEgpyKWMYmi2dIwMAYRzPw==}
+    dev: true
+
+  /@types/ms@0.7.34:
+    resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
     dev: true
 
   /@types/node@20.11.22:
