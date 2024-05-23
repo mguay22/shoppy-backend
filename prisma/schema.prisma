@@ -21,4 +21,5 @@ model Product {
   price Float
   user User @relation(fields: [userId], references: [id])
   userId Int
+  sold Boolean @default(false)
 }
