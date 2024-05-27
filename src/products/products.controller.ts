@@ -7,6 +7,9 @@ import {
   Param,
   ParseFilePipe,
   Post,
+  Query,
+  Res,
+  Sse,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -20,6 +23,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { PRODUCT_IMAGES } from './product-images';
+import { map, tap } from 'rxjs';
+import { Response } from 'express';
 
 @Controller('products')
 export class ProductsController {
@@ -32,6 +37,15 @@ export class ProductsController {
     @CurrentUser() user: TokenPayload,
   ) {
     return this.productsService.createProduct(body, user.userId);
+  }
+
+  @Sse('subscribe')
+  productsUpdate() {
+    return this.productsService.productsUpdated$.pipe(
+      map(() => {
+        return { data: {} };
+      }),
+    );
   }
 
   @Post(':productId/image')
@@ -63,8 +77,8 @@ export class ProductsController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async getProducts() {
-    return this.productsService.getProducts();
+  async getProducts(@Query('status') status?: string) {
+    return this.productsService.getProducts(status);
   }
 
   @Get(':productId')
