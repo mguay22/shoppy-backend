@@ -15,7 +15,9 @@ import { ConfigService } from '@nestjs/config';
 export class ProductsService {
   private readonly productsUpdated = new Subject<void>();
   readonly productsUpdated$ = this.productsUpdated.asObservable();
-  private readonly s3Client = new S3Client({});
+  private readonly s3Client = new S3Client({
+    region: 'us-east-1',
+  });
   private readonly bucket = 'shoppy-app';
 
   constructor(
