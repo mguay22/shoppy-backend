@@ -1,5 +1,5 @@
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
-import * as bcryptjs from 'bcryptjs';
+import * as bcrypt from 'bcrypt';
 import { CreateUserRequest } from './dto/create-user.request';
 import { PrismaService } from '../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
@@ -13,7 +13,7 @@ export class UsersService {
       return await this.prismaService.user.create({
         data: {
           ...data,
-          password: await bcryptjs.hash(data.password, 10),
+          password: await bcrypt.hash(data.password, 10),
         },
         select: {
           email: true,
