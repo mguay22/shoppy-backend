@@ -37,19 +37,7 @@ export class ProductsController {
 
   @Post(':productId/image')
   @UseGuards(JwtAuthGuard)
-  @UseInterceptors(
-    FileInterceptor('image', {
-      storage: diskStorage({
-        destination: PRODUCT_IMAGES,
-        filename: (req, file, callback) => {
-          callback(
-            null,
-            `${req.params.productId}${extname(file.originalname)}`,
-          );
-        },
-      }),
-    }),
-  )
+  @UseInterceptors(FileInterceptor('image'))
   uploadProductImage(
     @UploadedFile(
       new ParseFilePipe({
@@ -59,8 +47,11 @@ export class ProductsController {
         ],
       }),
     )
-    _file: Express.Multer.File,
-  ) {}
+    file: Express.Multer.File,
+    @Param('productId') productId: string,
+  ) {
+    return this.productsService.uploadProductImage(productId, file.buffer);
+  }
 
   @Get()
   @UseGuards(JwtAuthGuard)
