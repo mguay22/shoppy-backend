@@ -14,7 +14,7 @@ export class ProductsService {
   private readonly s3Client = new S3Client({
     region: 'us-east-1',
   });
-  private readonly bucket = 'shoppy-products';
+  private readonly bucket = 'shoppy-app';
 
   constructor(
     private readonly prismaService: PrismaService,

@@ -21,7 +21,7 @@ export class CheckoutService {
         {
           price_data: {
             currency: 'usd',
-            unit_amount: product.price * 100,
+            unit_amount: Math.round(product.price * 100),
             product_data: {
               name: product.name,
               description: product.description,
