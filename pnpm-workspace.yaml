@@ -1,0 +1,8 @@
+onlyBuiltDependencies:
+  - '@nestjs/core'
+  - '@prisma/client'
+  - '@prisma/engines'
+  - esbuild
+  - nestjs-pino
+  - prisma
+  - unrs-resolver
