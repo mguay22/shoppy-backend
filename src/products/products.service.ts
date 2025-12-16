@@ -1,13 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProductRequest } from './dto/create-product.request';
 import { PrismaService } from '../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
 import { ProductsGateway } from './products.gateway';
 import {
   GetObjectCommand,
   PutObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3';
+import {
+  ProductFindManyArgs,
+  ProductUpdateInput,
+} from '../generated/prisma/models';
 
 @Injectable()
 export class ProductsService {
@@ -33,7 +36,7 @@ export class ProductsService {
   }
 
   async getProducts(status?: string) {
-    const args: Prisma.ProductFindManyArgs = {};
+    const args: ProductFindManyArgs = {};
     if (status === 'availible') {
       args.where = { sold: false };
     }
@@ -69,7 +72,7 @@ export class ProductsService {
     );
   }
 
-  async update(productId: number, data: Prisma.ProductUpdateInput) {
+  async update(productId: number, data: ProductUpdateInput) {
     await this.prismaService.product.update({
       where: { id: productId },
       data,
